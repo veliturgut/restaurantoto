@@ -188,11 +188,11 @@ namespace restaurantoto
                             var fark = t2 - t1;
 
 
-                           // item.Text = String.Format("{0}{1}{2}",
-                               // fark.Days > 0 ? string.Format("{0} Gün", fark.Days) :"",
-                              //  fark.Hours > 0 ? string.Format("{0} Saat", fark.Hours) :"",
-                              //  fark.Minutes > 0 ? string.Format("{0} Dakika ", fark.Minutes) :"").Trim() + "\n\n\nMasa" + dr["ID"].ToString();
-
+                            item.Text = String.Format("{0}{1}{2}",
+                                fark.Days > 0 ? string.Format("{0} Gün", fark.Days) :"",
+                                fark.Hours > 0 ? string.Format("{0} Saat", fark.Hours) :"",
+                                fark.Minutes > 0 ? string.Format("{0} Dakika ", fark.Minutes) :"").Trim() + "\n\n\nMasa" + dr["ID"].ToString();
+                              //denee
                             //item.BackgroundImage = (System.Drawing.Image)(Properties.Resource.dolu);
                         }
                         else if(item.Name == "btnMasa" + dr["ID"].ToString() && dr["DURUM"].ToString() == "3")
