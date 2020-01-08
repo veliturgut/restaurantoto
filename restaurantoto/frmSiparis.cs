@@ -80,6 +80,21 @@ namespace restaurantoto
 
         private void frmSiparis_Load(object sender, EventArgs e)
         {
+            lblMasaNo.Text = cGenel._ButtonValue;
+
+            cMasalar ms = new cMasalar();
+            int tableId = ms.TableGetbyNumber(cGenel._ButtonName);
+
+            if(ms.TableGetbyState(tableId,2) == true || ms.TableGetbyState(tableId, 4) == true)
+            {
+
+                cAdisyon Ad = new cAdisyon();
+                int AdditionId = Ad.getByAddition(tableId);
+
+                cSiparis orders = new cSiparis();
+                orders.getByOrder(lvSiparisler, AdditionId);
+            }
+
 
             btn1.Click += new EventHandler(islem);
             btn2.Click += new EventHandler(islem);
