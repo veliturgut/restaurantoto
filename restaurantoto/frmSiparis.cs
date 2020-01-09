@@ -77,19 +77,20 @@ namespace restaurantoto
                     break;
             }
         }
-
+        int tableId;
+        int AdditionId;
         private void frmSiparis_Load(object sender, EventArgs e)
         {
             lblMasaNo.Text = cGenel._ButtonValue;
 
             cMasalar ms = new cMasalar();
-            int tableId = ms.TableGetbyNumber(cGenel._ButtonName);
+            tableId = ms.TableGetbyNumber(cGenel._ButtonName);
 
             if(ms.TableGetbyState(tableId,2) == true || ms.TableGetbyState(tableId, 4) == true)
             {
 
                 cAdisyon Ad = new cAdisyon();
-                int AdditionId = Ad.getByAddition(tableId);
+                AdditionId = Ad.getByAddition(tableId);
 
                 cSiparis orders = new cSiparis();
                 orders.getByOrder(lvSiparisler, AdditionId);
@@ -106,6 +107,82 @@ namespace restaurantoto
             btn8.Click += new EventHandler(islem);
             btn9.Click += new EventHandler(islem);
             btn0.Click += new EventHandler(islem);
+
+        }
+        cUrunCesitleri Uc = new cUrunCesitleri();
+        private void btnAnaYemek3_Click(object sender, EventArgs e)
+        {
+            
+            Uc.getByProductTypes(lvMenu, btnAnaYemek3);
+        }
+
+        private void btnIcecekler8_Click(object sender, EventArgs e)
+        {
+            Uc.getByProductTypes(lvMenu, btnIcecekler8);
+        }
+
+        private void btnTatlilar7_Click(object sender, EventArgs e)
+        {
+            Uc.getByProductTypes(lvMenu, btnTatlilar7);
+        }
+
+        private void btnSalata6_Click(object sender, EventArgs e)
+        {
+            Uc.getByProductTypes(lvMenu, btnSalata6);
+        }
+
+        private void btnFastFood5_Click(object sender, EventArgs e)
+        {
+            Uc.getByProductTypes(lvMenu, btnFastFood5);
+        }
+
+        private void btnCorba1_Click(object sender, EventArgs e)
+        {
+            Uc.getByProductTypes(lvMenu, btnCorba1);
+        }
+
+        private void btnMakarna4_Click(object sender, EventArgs e)
+        {
+            Uc.getByProductTypes(lvMenu, btnMakarna4);
+        }
+
+        private void btnAraSicak2_Click(object sender, EventArgs e)
+        {
+            Uc.getByProductTypes(lvMenu, btnAraSicak2);
+        }
+
+        int sayac = 0;
+        int sayac2 = 0;
+        private void lvMenu_DoubleClick(object sender, EventArgs e)
+        {
+            if(txtAdet.Text == "")
+            {
+                txtAdet.Text = "1";
+            }
+            if(lvMenu.Items.Count > 0)
+            {
+                sayac = lvSiparisler.Items.Count;
+                lvSiparisler.Items.Add(lvMenu.SelectedItems[0].Text);
+                lvSiparisler.Items[sayac].SubItems.Add(txtAdet.Text);
+                lvSiparisler.Items[sayac].SubItems.Add(lvMenu.SelectedItems[0].SubItems[2].Text);
+                lvSiparisler.Items[sayac].SubItems.Add((Convert.ToDecimal(lvMenu.SelectedItems[0].SubItems[1].Text) * Convert.ToDecimal
+                    (txtAdet.Text)).ToString());
+                lvSiparisler.Items[sayac].SubItems.Add("0");
+                sayac2 = lvYeniEklenenler.Items.Count;
+                lvSiparisler.Items[sayac].SubItems.Add(sayac.ToString());
+
+                lvYeniEklenenler.Items.Add(AdditionId.ToString());
+                lvYeniEklenenler.Items[sayac2].SubItems.Add(lvMenu.SelectedItems[0].SubItems[2].Text);
+                lvYeniEklenenler.Items[sayac2].SubItems.Add(txtAdet.Text);
+                lvYeniEklenenler.Items[sayac2].SubItems.Add(tableId.ToString());
+                lvYeniEklenenler.Items[sayac2].SubItems.Add(sayac2.ToString());
+
+                sayac2++;
+
+                txtAdet.Text = "";
+
+            }
+
 
         }
     }

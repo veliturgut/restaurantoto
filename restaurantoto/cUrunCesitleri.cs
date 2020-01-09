@@ -67,16 +67,12 @@ namespace restaurantoto
             {
                 Cesitler.Items.Add(dr["URUNAD"].ToString());
                 Cesitler.Items[i].SubItems.Add(dr["FIYAT"].ToString());
-                Cesitler.Items[i].SubItems.Add(dr["UrunId"].ToString());
+                Cesitler.Items[i].SubItems.Add(dr["ID"].ToString());
                 i++;
             }
             dr.Close();
             conn.Dispose();
-
-
-            return 0;
+            conn.Close();
         }
-
-
     }
 }
