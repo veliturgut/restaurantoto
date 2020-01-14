@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace restaurantoto
 {
@@ -37,45 +38,7 @@ namespace restaurantoto
         //Hesap makinesi işlemi
         void islem(Object sender, EventArgs e)
         {
-            Button btn = sender as Button;
 
-            switch (btn.Name)
-            {
-
-                case "btn1":
-                    txtAdet.Text += (1).ToString();
-                    break;
-                case "btn2":
-                    txtAdet.Text += (2).ToString();
-                    break;
-                case "btn3":
-                    txtAdet.Text += (3).ToString();
-                    break;
-                case "btn4":
-                    txtAdet.Text += (4).ToString();
-                    break;
-                case "btn5":
-                    txtAdet.Text += (5).ToString();
-                    break;
-                case "btn6":
-                    txtAdet.Text += (6).ToString();
-                    break;
-                case "btn7":
-                    txtAdet.Text += (7).ToString();
-                    break;
-                case "btn8":
-                    txtAdet.Text += (8).ToString();
-                    break;
-                case "btn9":
-                    txtAdet.Text += (9).ToString();
-                    break;
-                case "btn0":
-                    txtAdet.Text += (0).ToString();
-                    break;
-                default:
-                    MessageBox.Show("Sayı Giriniz");
-                    break;
-            }
         }
         int tableId;
         int AdditionId;
@@ -169,7 +132,7 @@ namespace restaurantoto
                     (txtAdet.Text)).ToString());
                 lvSiparisler.Items[sayac].SubItems.Add("0");
                 sayac2 = lvYeniEklenenler.Items.Count;
-                lvSiparisler.Items[sayac].SubItems.Add(sayac.ToString());
+                lvSiparisler.Items[sayac].SubItems.Add(sayac2.ToString());
 
                 lvYeniEklenenler.Items.Add(AdditionId.ToString());
                 lvYeniEklenenler.Items[sayac2].SubItems.Add(lvMenu.SelectedItems[0].SubItems[2].Text);
@@ -183,6 +146,112 @@ namespace restaurantoto
 
             }
 
+
+        }
+        ArrayList silinenler = new ArrayList();
+
+        private void btnSiparis_Click(object sender, EventArgs e)
+        {
+
+            /*
+            1 - Masa Boş
+            2 - Masa Dolu
+            3 - Masa Rezerve
+             */
+
+            cMasalar masa = new cMasalar();
+            frmMasalar ms = new frmMasalar();
+            cAdisyon newAddition = new cAdisyon();
+            cSiparis saveOrder = new cSiparis();
+
+            bool sonuc = false;
+            if(masa.TableGetbyState(tableId,1) == true)
+            {
+
+                newAddition.ServisTurNo = 1;
+                newAddition.PersonelId = 1;
+                newAddition.MasaId = tableId;
+                newAddition.Tarih = DateTime.Now;
+                sonuc = newAddition.setByAdditionNew(newAddition);
+                masa.setChangeTableState(cGenel._ButtonName, 2);
+
+                if(lvSiparisler.Items.Count > 0)
+                {
+
+                    for(int i=0; i < lvSiparisler.Items.Count; i++)
+                    {
+                        saveOrder.MasaId = tableId;
+                        saveOrder.UrunId = Convert.ToInt32(lvSiparisler.Items[i].SubItems[2].Text);
+                        saveOrder.AdisyonId = newAddition.getByAddition(tableId);
+                        saveOrder.Adet = Convert.ToInt32(lvSiparisler.Items[i].SubItems[1].Text);
+                        saveOrder.setSaveOrder(saveOrder);
+                    }
+
+                    this.Close();
+                    ms.Show();
+                }
+
+            }
+            else if(masa.TableGetbyState(tableId, 2) == true)
+            {
+
+                if(lvYeniEklenenler.Items.Count > 0)
+                {
+
+                    for(int i = 0; i < lvYeniEklenenler.Items.Count; i++)
+                    {
+
+                        saveOrder.MasaId = tableId;
+                        saveOrder.UrunId = Convert.ToInt32(lvYeniEklenenler.Items[i].SubItems[1].Text);
+                        saveOrder.AdisyonId = newAddition.getByAddition(tableId);
+                        saveOrder.Adet = Convert.ToInt32(lvYeniEklenenler.Items[i].SubItems[2].Text);
+                        saveOrder.setSaveOrder(saveOrder);
+                    }
+
+                }
+                if(silinenler.Count > 0)
+                {
+                    foreach(string item in silinenler)
+                    {
+                        saveOrder.setDeleteOrder(Convert.ToInt32(item));
+                    }
+
+                }
+
+                this.Close();
+                ms.Show();
+            }
+
+        }
+
+        private void lvSiparisler_DoubleClick(object sender, EventArgs e)
+        {
+
+            if(lvSiparisler.Items.Count > 0)
+            {
+
+                if(lvSiparisler.SelectedItems[0].SubItems[4].Text != "0")
+                {
+
+                    cSiparis saveOrder = new cSiparis();
+                    saveOrder.setDeleteOrder(Convert.ToInt32(lvSiparisler.Items[0].SubItems[4].Text));
+
+                }
+                else
+                {
+                    for(int i=0; i<lvYeniEklenenler.Items.Count; i++)
+                    {
+                        if(lvYeniEklenenler.Items[i].SubItems[4].Text == lvSiparisler.SelectedItems[0].SubItems[5].Text)
+                        {
+                            lvYeniEklenenler.Items.RemoveAt(i);
+                        }
+                    }
+
+                }
+
+                lvSiparisler.Items.RemoveAt(lvSiparisler.SelectedItems[0].Index);
+
+            }
 
         }
     }

@@ -47,8 +47,8 @@
             this.lvSiparisler = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.txtAra = new System.Windows.Forms.TextBox();
@@ -301,6 +301,7 @@
             this.lvSiparisler.TabIndex = 0;
             this.lvSiparisler.UseCompatibleStateImageBehavior = false;
             this.lvSiparisler.View = System.Windows.Forms.View.Details;
+            this.lvSiparisler.DoubleClick += new System.EventHandler(this.lvSiparisler_DoubleClick);
             // 
             // columnHeader4
             // 
@@ -312,14 +313,14 @@
             this.columnHeader5.Text = "Ürün Adet";
             this.columnHeader5.Width = 121;
             // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "UrunId";
+            // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Ürün Fiyat";
             this.columnHeader6.Width = 95;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "UrunId";
             // 
             // columnHeader8
             // 
@@ -531,6 +532,7 @@
             this.btnSiparis.TabIndex = 27;
             this.btnSiparis.Text = "Sipariş";
             this.btnSiparis.UseVisualStyleBackColor = false;
+            this.btnSiparis.Click += new System.EventHandler(this.btnSiparis_Click);
             // 
             // btnIptal
             // 

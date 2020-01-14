@@ -101,5 +101,55 @@ namespace restaurantoto
 
         }
 
+        public bool setSaveOrder(cSiparis Bilgiler)
+        {
+            bool sonuc = false;
+
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Insert Into satislar(ADISYONID,URUNID,ADET,MASAID) values(@AdisyonNo,@UrunId,@Adet,@masaId)", con);
+
+            try
+            {
+
+                if(con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                cmd.Parameters.Add("@AdisyonNo", SqlDbType.Int).Value = Bilgiler._adisyonID;
+                cmd.Parameters.Add("@UrunId", SqlDbType.Int).Value = Bilgiler._urunId;
+                cmd.Parameters.Add("@Adet", SqlDbType.Int).Value = Bilgiler._adet;
+                cmd.Parameters.Add("@masaId", SqlDbType.Int).Value = Bilgiler._masaId;
+                sonuc = Convert.ToBoolean(cmd.ExecuteNonQuery());
+            }
+            catch(Exception ex)
+            {
+                string hata = ex.Message;
+            }
+            finally
+            {
+                con.Dispose();
+                con.Close();
+            }
+            return sonuc;
+        }
+
+        public void setDeleteOrder(int satisId)
+        {
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Delete From Satislar Where ID=@SatisID",con);
+
+            cmd.Parameters.Add("@SatisID", SqlDbType.Int).Value = satisId;
+
+            if(con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+
+            cmd.ExecuteNonQuery();
+            con.Dispose();
+            con.Close();
+        }
+
     }
 }

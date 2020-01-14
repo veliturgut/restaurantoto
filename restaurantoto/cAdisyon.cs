@@ -97,5 +97,41 @@ namespace restaurantoto
             return MasaId;
         } // açık olan masanın adisyon idsi
 
+        public bool setByAdditionNew(cAdisyon Bilgiler)
+        {
+            bool sonuc = false;
+
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Insert Into Adisyonlar(SERVISTURNO,TARIH,PERSONELID,MASAID,DURUM) values (@ServisTurNo,@Tarih,@PersonelId,@MasaId,@Durum)", con);
+
+            try
+            {
+                if(con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                cmd.Parameters.Add("@ServisTurNo", SqlDbType.Int).Value = Bilgiler.ServisTurNo;
+                cmd.Parameters.Add("@Tarih", SqlDbType.DateTime).Value = Bilgiler.Tarih;
+                cmd.Parameters.Add("@PersonelID", SqlDbType.Int).Value = Bilgiler.PersonelId;
+                cmd.Parameters.Add("@MasaId", SqlDbType.Int).Value = Bilgiler.MasaId;
+                cmd.Parameters.Add("@Durum", SqlDbType.Bit).Value = 0;
+                sonuc = Convert.ToBoolean(cmd.ExecuteNonQuery());
+
+
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+            }
+            finally
+            {
+                con.Dispose();
+                con.Close();
+            }
+
+            return sonuc;
+        }
+
     }
 }

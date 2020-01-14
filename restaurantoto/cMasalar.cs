@@ -54,16 +54,17 @@ namespace restaurantoto
 
         cGenel gnl = new cGenel();
 
-        public string SessionSum(int state)
+        public string SessionSum(int state,string masaId)
         {
             string dt = "";
             SqlConnection con = new SqlConnection(gnl.conString);
-            SqlCommand cmd = new SqlCommand("Select Tarih,MasaId From adisyonlar Right Join Masalar on adisyonlar.MasaId = Masalar.ID Where Masalar.DURUM = @durum " +
-                "and Adisyon.Durum = 0",con);
+            SqlCommand cmd = new SqlCommand("Select TARIH,MasaId From adisyonlar Right Join Masalar on adisyonlar.MasaId = Masalar.ID Where " +
+                "Masalar.DURUM = @durum and adisyonlar.Durum = 0 and masalar.ID = @masaId",con);
 
             SqlDataReader dr = null;
 
             cmd.Parameters.Add("@durum", SqlDbType.Int).Value = state;
+            cmd.Parameters.Add("@masaId", SqlDbType.Int).Value = Convert.ToInt32(masaId);
 
             try
             {
@@ -75,7 +76,7 @@ namespace restaurantoto
 
                 while (dr.Read())
                 {
-                    dt = Convert.ToDateTime(dr["Tarih"]).ToString();
+                    dt = Convert.ToDateTime(dr["TARIH"]).ToString();
                 }
 
             }
@@ -136,5 +137,29 @@ namespace restaurantoto
             }
             return result;
         }
+
+        public void setChangeTableState(string ButonName, int state)
+        {
+
+            SqlConnection con = new SqlConnection(gnl.conString);
+
+            SqlCommand cmd = new SqlCommand("Update masalar Set DURUM=@Durum where ID=@MasaNo", con);
+
+            if(con.State == ConnectionState.Closed)
+            {
+                con.Open();
+
+            }
+
+            string aa = ButonName;
+            int uzunluk = aa.Length;
+            cmd.Parameters.Add("@Durum", SqlDbType.Int).Value = state;
+            cmd.Parameters.Add("@MasaNo", SqlDbType.Int).Value = aa.Substring(uzunluk - 1, 1);
+            cmd.ExecuteNonQuery();
+            con.Dispose();
+            con.Close();
+
+        }
+
     }
 }
