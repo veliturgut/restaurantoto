@@ -157,6 +157,7 @@ namespace restaurantoto
             1 - Masa Boş
             2 - Masa Dolu
             3 - Masa Rezerve
+            4 - Dolu rezerve
              */
 
             cMasalar masa = new cMasalar();
@@ -192,7 +193,7 @@ namespace restaurantoto
                 }
 
             }
-            else if(masa.TableGetbyState(tableId, 2) == true)
+            else if(masa.TableGetbyState(tableId, 2) == true || masa.TableGetbyState(tableId,4) == true)
             {
 
                 if(lvYeniEklenenler.Items.Count > 0)
@@ -220,6 +221,33 @@ namespace restaurantoto
 
                 this.Close();
                 ms.Show();
+            }
+            else if (masa.TableGetbyState(tableId, 3) == true)
+            {
+
+                newAddition.ServisTurNo = 1;
+                newAddition.PersonelId = 1;
+                newAddition.MasaId = tableId;
+                newAddition.Tarih = DateTime.Now;
+                sonuc = newAddition.setByAdditionNew(newAddition);
+                masa.setChangeTableState(cGenel._ButtonName, 4);
+
+                if (lvSiparisler.Items.Count > 0)
+                {
+
+                    for (int i = 0; i < lvSiparisler.Items.Count; i++)
+                    {
+                        saveOrder.MasaId = tableId;
+                        saveOrder.UrunId = Convert.ToInt32(lvSiparisler.Items[i].SubItems[2].Text);
+                        saveOrder.AdisyonId = newAddition.getByAddition(tableId);
+                        saveOrder.Adet = Convert.ToInt32(lvSiparisler.Items[i].SubItems[1].Text);
+                        saveOrder.setSaveOrder(saveOrder);
+                    }
+
+                    this.Close();
+                    ms.Show();
+                }
+
             }
 
         }
@@ -253,6 +281,20 @@ namespace restaurantoto
 
             }
 
+        }
+
+        private void txtAra_TextChanged(object sender, EventArgs e)
+        {
+
+            if(txtAra.Text == "")
+            {
+                txtAra.Text = "";
+            }
+            else
+            {
+                cUrunCesitleri cu = new cUrunCesitleri();
+                cu.getByProductSearch(lvMenu, Convert.ToInt32(txtAra.Text));
+            }
         }
     }
 }

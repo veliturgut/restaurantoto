@@ -337,6 +337,7 @@
             this.txtAra.Name = "txtAra";
             this.txtAra.Size = new System.Drawing.Size(170, 41);
             this.txtAra.TabIndex = 10;
+            this.txtAra.TextChanged += new System.EventHandler(this.txtAra_TextChanged);
             // 
             // label1
             // 

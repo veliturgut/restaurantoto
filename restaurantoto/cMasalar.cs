@@ -102,7 +102,16 @@ namespace restaurantoto
             string aa = TableValue;
             int length = aa.Length;
 
-            return Convert.ToInt32(aa.Substring(length - 1, 1));
+            if (length > 8)
+            {
+                return Convert.ToInt32(aa.Substring(length - 2, 2));
+            }
+            else
+            {
+                return Convert.ToInt32(aa.Substring(length - 1, 1));
+            }
+
+            
         }
 
 
@@ -144,6 +153,7 @@ namespace restaurantoto
             SqlConnection con = new SqlConnection(gnl.conString);
 
             SqlCommand cmd = new SqlCommand("Update masalar Set DURUM=@Durum where ID=@MasaNo", con);
+            string masaNo = "";
 
             if(con.State == ConnectionState.Closed)
             {
@@ -154,6 +164,15 @@ namespace restaurantoto
             string aa = ButonName;
             int uzunluk = aa.Length;
             cmd.Parameters.Add("@Durum", SqlDbType.Int).Value = state;
+
+            if (uzunluk > 8)
+            {
+                masaNo = aa.Substring(uzunluk - 2, 2);
+            }
+            else
+            {
+                masaNo = aa.Substring(uzunluk - 1, 1);
+            }
             cmd.Parameters.Add("@MasaNo", SqlDbType.Int).Value = aa.Substring(uzunluk - 1, 1);
             cmd.ExecuteNonQuery();
             con.Dispose();

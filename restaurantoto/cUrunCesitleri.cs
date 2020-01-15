@@ -74,5 +74,34 @@ namespace restaurantoto
             conn.Dispose();
             conn.Close();
         }
+
+        public void getByProductSearch(ListView Cesitler,int txt)
+        {
+            Cesitler.Items.Clear();
+
+            SqlConnection conn = new SqlConnection(gnl.conString);
+            SqlCommand comm = new SqlCommand("Select * from urunler where ID = @ID", conn);
+
+
+            comm.Parameters.Add("@ID", SqlDbType.Int).Value = txt;
+            if (conn.State == ConnectionState.Closed)
+            {
+                conn.Open();
+            }
+
+            SqlDataReader dr = comm.ExecuteReader();
+            int i = 0;
+
+            while (dr.Read())
+            {
+                Cesitler.Items.Add(dr["URUNAD"].ToString());
+                Cesitler.Items[i].SubItems.Add(dr["FIYAT"].ToString());
+                Cesitler.Items[i].SubItems.Add(dr["ID"].ToString());
+                i++;
+            }
+            dr.Close();
+            conn.Dispose();
+            conn.Close();
+        }
     }
 }
