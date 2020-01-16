@@ -19,6 +19,10 @@ namespace restaurantoto
         public static string _ButtonValue;
 
         public static string _ButtonName;
+
+        public static int _ServisTurNo;
+
+        public static string _AdisyonId;
         
     }
 }

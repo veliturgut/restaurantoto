@@ -32,5 +32,77 @@ namespace restaurantoto
                 Application.Exit();
             }
         }
+
+        cSiparis cs = new cSiparis();
+        private void frmBill_Load(object sender, EventArgs e)
+        {
+            if(cGenel._ServisTurNo == 1)
+            {
+
+                lblAdisyonId.Text = cGenel._AdisyonId;
+                txtIndirimTutari.TextChanged += new EventHandler(txtIndirimTutari_TextChanged);
+                cs.getByOrder(lvUrunler, Convert.ToInt32(lblAdisyonId.Text));
+
+                if(lvUrunler.Items.Count > 0)
+                {
+                    decimal toplam = 0;
+
+                    for(int i=0; i < lvUrunler.Items.Count; i++)
+                    {
+
+                        toplam += Convert.ToDecimal(lvUrunler.Items[i].SubItems[3]);
+                    }
+
+                    lblToplamTutar.Text = string.Format("0:0.000", toplam);
+                    lblOdenecek.Text = string.Format("0:0.000", toplam);
+                }
+
+                txtIndirimTutari.Clear();
+            }
+        }
+
+        private void txtIndirimTutari_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Convert.ToDecimal(lblIndirim.Text) < Convert.ToDecimal(lblToplamTutar))
+                {
+
+                    try
+                    {
+                        lblIndirim.Text = string.Format("0:0.000", Convert.ToDecimal(txtIndirimTutari.Text));
+                    }
+                    catch (Exception)
+                    {
+                        lblIndirim.Text = string.Format("0:0.000", 0);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("İndirim Tutarı Toplam Tutardan Fazla Olamaz !!!");
+                }
+
+
+            }
+            catch (Exception)
+            {
+                lblIndirim.Text = string.Format("0:0.000", 0);
+            }
+        }
+
+        private void chkIndirim_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkIndirim.Checked)
+            {
+                gbIndirim.Visible = true;
+            }
+            else
+            {
+                gbIndirim.Visible = false;
+            }
+
+
+        }
     }
 }

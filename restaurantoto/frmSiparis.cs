@@ -170,6 +170,7 @@ namespace restaurantoto
             {
 
                 newAddition.ServisTurNo = 1;
+                
                 newAddition.PersonelId = 1;
                 newAddition.MasaId = tableId;
                 newAddition.Tarih = DateTime.Now;
@@ -195,8 +196,8 @@ namespace restaurantoto
             }
             else if(masa.TableGetbyState(tableId, 2) == true || masa.TableGetbyState(tableId,4) == true)
             {
-
-                if(lvYeniEklenenler.Items.Count > 0)
+                
+                if (lvYeniEklenenler.Items.Count > 0)
                 {
 
                     for(int i = 0; i < lvYeniEklenenler.Items.Count; i++)
@@ -209,6 +210,7 @@ namespace restaurantoto
                         saveOrder.setSaveOrder(saveOrder);
                     }
 
+                   
                 }
                 if(silinenler.Count > 0)
                 {
@@ -224,7 +226,7 @@ namespace restaurantoto
             }
             else if (masa.TableGetbyState(tableId, 3) == true)
             {
-
+                
                 newAddition.ServisTurNo = 1;
                 newAddition.PersonelId = 1;
                 newAddition.MasaId = tableId;
@@ -295,6 +297,15 @@ namespace restaurantoto
                 cUrunCesitleri cu = new cUrunCesitleri();
                 cu.getByProductSearch(lvMenu, Convert.ToInt32(txtAra.Text));
             }
+        }
+
+        private void btnOdeme_Click(object sender, EventArgs e)
+        {
+            cGenel._ServisTurNo = 1;
+            cGenel._AdisyonId = AdditionId.ToString();
+            frmBill frm = new frmBill();
+            this.Close();
+            frm.Show();
         }
     }
 }

@@ -520,6 +520,7 @@
             this.btnOdeme.TabIndex = 26;
             this.btnOdeme.Text = "Ödeme";
             this.btnOdeme.UseVisualStyleBackColor = false;
+            this.btnOdeme.Click += new System.EventHandler(this.btnOdeme_Click);
             // 
             // btnSiparis
             // 
