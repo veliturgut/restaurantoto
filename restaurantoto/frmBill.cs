@@ -50,14 +50,42 @@ namespace restaurantoto
                     for(int i=0; i < lvUrunler.Items.Count; i++)
                     {
 
-                        toplam += Convert.ToDecimal(lvUrunler.Items[i].SubItems[3]);
+                        toplam += Convert.ToDecimal(lvUrunler.Items[i].SubItems[3].Text);
                     }
 
-                    lblToplamTutar.Text = string.Format("0:0.000", toplam);
-                    lblOdenecek.Text = string.Format("0:0.000", toplam);
+                    lblToplamTutar.Text = string.Format("{0:0.000}", toplam);
+                    lblOdenecek.Text = string.Format("{0:0.000}", toplam);
+                    decimal kdv = Convert.ToDecimal(lblOdenecek.Text) * 18 / 100;
+                    lblKdv.Text = string.Format("{0:0.000}", kdv);
                 }
 
                 txtIndirimTutari.Clear();
+            }
+            else if(cGenel._ServisTurNo == 2)
+            {
+
+                lblAdisyonId.Text = cGenel._AdisyonId;
+                txtIndirimTutari.TextChanged += new EventHandler(txtIndirimTutari_TextChanged);
+                cs.getByOrder(lvUrunler, Convert.ToInt32(lblAdisyonId.Text));
+
+                if (lvUrunler.Items.Count > 0)
+                {
+                    decimal toplam = 0;
+
+                    for (int i = 0; i < lvUrunler.Items.Count; i++)
+                    {
+
+                        toplam += Convert.ToDecimal(lvUrunler.Items[i].SubItems[3].Text);
+                    }
+
+                    lblToplamTutar.Text = string.Format("{0:0.000}", toplam);
+                    lblOdenecek.Text = string.Format("{0:0.000}", toplam);
+                    decimal kdv = Convert.ToDecimal(lblOdenecek.Text) * 18 / 100;
+                    lblKdv.Text = string.Format("{0:0.000}", kdv);
+                }
+
+                txtIndirimTutari.Clear();
+
             }
         }
 
@@ -65,16 +93,16 @@ namespace restaurantoto
         {
             try
             {
-                if (Convert.ToDecimal(lblIndirim.Text) < Convert.ToDecimal(lblToplamTutar))
+                if (Convert.ToDecimal(txtIndirimTutari.Text) < Convert.ToDecimal(lblToplamTutar.Text))
                 {
 
                     try
                     {
-                        lblIndirim.Text = string.Format("0:0.000", Convert.ToDecimal(txtIndirimTutari.Text));
+                        lblIndirim.Text = string.Format("{0:0.000}", Convert.ToDecimal(txtIndirimTutari.Text));
                     }
                     catch (Exception)
                     {
-                        lblIndirim.Text = string.Format("0:0.000", 0);
+                        lblIndirim.Text = string.Format("{0:0.000}", 0);
                     }
 
                 }
@@ -87,7 +115,7 @@ namespace restaurantoto
             }
             catch (Exception)
             {
-                lblIndirim.Text = string.Format("0:0.000", 0);
+                lblIndirim.Text = string.Format("{0:0.000}", 0);
             }
         }
 
@@ -103,6 +131,20 @@ namespace restaurantoto
             }
 
 
+        }
+
+        private void lblIndirim_TextChanged(object sender, EventArgs e)
+        {
+            if (Convert.ToDecimal(lblIndirim.Text) > 0)
+            {
+                decimal odenecek = 0;
+                lblOdenecek.Text = lblToplamTutar.Text;
+                odenecek = Convert.ToDecimal(lblOdenecek.Text) - Convert.ToDecimal(lblIndirim.Text);
+                lblOdenecek.Text = string.Format("{0:0.000}", odenecek);
+            }
+
+            decimal kdv = Convert.ToDecimal(lblOdenecek.Text) * 18/100;
+            lblKdv.Text = string.Format("{0:0.000}", kdv);
         }
     }
 }

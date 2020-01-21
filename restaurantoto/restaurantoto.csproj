@@ -49,6 +49,7 @@
     <Compile Include="cAdisyon.cs" />
     <Compile Include="cGenel.cs" />
     <Compile Include="cMasalar.cs" />
+    <Compile Include="cPaketler.cs" />
     <Compile Include="cPersonelHareketleri.cs" />
     <Compile Include="cPersoneller.cs" />
     <Compile Include="cSiparis.cs" />

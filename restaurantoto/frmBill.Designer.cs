@@ -31,6 +31,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkIndirim = new System.Windows.Forms.CheckBox();
             this.gbIndirim = new System.Windows.Forms.GroupBox();
+            this.txtIndirimTutari = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lblOdenecek = new System.Windows.Forms.Label();
             this.lblToplamTutar = new System.Windows.Forms.Label();
@@ -57,7 +58,6 @@
             this.btncikis = new System.Windows.Forms.Button();
             this.btnGeriDon = new System.Windows.Forms.Button();
             this.lblAdisyonId = new System.Windows.Forms.Label();
-            this.txtIndirimTutari = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.gbIndirim.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -101,6 +101,14 @@
             this.gbIndirim.TabStop = false;
             this.gbIndirim.Text = "Özel Aktivite";
             this.gbIndirim.Visible = false;
+            // 
+            // txtIndirimTutari
+            // 
+            this.txtIndirimTutari.Location = new System.Drawing.Point(26, 63);
+            this.txtIndirimTutari.Name = "txtIndirimTutari";
+            this.txtIndirimTutari.Size = new System.Drawing.Size(188, 41);
+            this.txtIndirimTutari.TabIndex = 0;
+            this.txtIndirimTutari.TextChanged += new System.EventHandler(this.txtIndirimTutari_TextChanged);
             // 
             // groupBox3
             // 
@@ -161,6 +169,7 @@
             this.lblIndirim.Size = new System.Drawing.Size(33, 36);
             this.lblIndirim.TabIndex = 8;
             this.lblIndirim.Text = "0";
+            this.lblIndirim.TextChanged += new System.EventHandler(this.lblIndirim_TextChanged);
             // 
             // label8
             // 
@@ -364,14 +373,6 @@
             this.lblAdisyonId.Size = new System.Drawing.Size(21, 17);
             this.lblAdisyonId.TabIndex = 28;
             this.lblAdisyonId.Text = "ID";
-            // 
-            // txtIndirimTutari
-            // 
-            this.txtIndirimTutari.Location = new System.Drawing.Point(26, 63);
-            this.txtIndirimTutari.Name = "txtIndirimTutari";
-            this.txtIndirimTutari.Size = new System.Drawing.Size(188, 41);
-            this.txtIndirimTutari.TabIndex = 0;
-            this.txtIndirimTutari.TextChanged += new System.EventHandler(this.txtIndirimTutari_TextChanged);
             // 
             // frmBill
             // 
