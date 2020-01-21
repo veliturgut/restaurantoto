@@ -34,8 +34,10 @@ namespace restaurantoto
         }
 
         cSiparis cs = new cSiparis();
+        int PayTypeId = 0;
         private void frmBill_Load(object sender, EventArgs e)
         {
+            gbIndirim.Visible = false;
             if(cGenel._ServisTurNo == 1)
             {
 
@@ -65,8 +67,24 @@ namespace restaurantoto
             {
 
                 lblAdisyonId.Text = cGenel._AdisyonId;
+                cPaketler pc = new cPaketler();
+                PayTypeId = pc.GetPayTypeId(Convert.ToInt32(lblAdisyonId.Text));
+
                 txtIndirimTutari.TextChanged += new EventHandler(txtIndirimTutari_TextChanged);
                 cs.getByOrder(lvUrunler, Convert.ToInt32(lblAdisyonId.Text));
+
+                if(PayTypeId == 1)
+                {
+                    rbKrediKarti.Checked = true;
+                }
+                else if(PayTypeId == 2)
+                {
+                    rbNakit.Checked = true;
+                }
+                else if (PayTypeId == 3)
+                {
+                    rbTicket.Checked = true;
+                }
 
                 if (lvUrunler.Items.Count > 0)
                 {
@@ -124,10 +142,12 @@ namespace restaurantoto
             if (chkIndirim.Checked)
             {
                 gbIndirim.Visible = true;
+                txtIndirimTutari.Clear();
             }
             else
             {
                 gbIndirim.Visible = false;
+                txtIndirimTutari.Clear();
             }
 
 
@@ -146,5 +166,9 @@ namespace restaurantoto
             decimal kdv = Convert.ToDecimal(lblOdenecek.Text) * 18/100;
             lblKdv.Text = string.Format("{0:0.000}", kdv);
         }
+
+        cRezervasyon rezerve = new cRezervasyon();
+        cMasalar masalar = new cMasalar();
+
     }
 }

@@ -135,5 +135,118 @@ namespace restaurantoto
 
            
         }
+
+
+        public int GetPayTypeId(int adisyonid)
+        {
+            int PayTypeID = 0;
+
+
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Select paketSiparis.ODEMETURID from paketSiparis Inner Join Adisyonlar on " +
+                "paketSiparis.ADISYONID=Adisyonlar.ID where adisyonlar.ID = @adisyonid", con);
+
+
+            try
+            {
+
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                cmd.Parameters.Add("@adisyonid", SqlDbType.Int).Value = adisyonid;
+                 
+                PayTypeID = Convert.ToInt32(cmd.ExecuteScalar());
+
+            }
+            catch (Exception ex)
+            {
+
+                string hata = ex.Message;
+            }
+            finally
+            {
+                con.Dispose();
+                con.Close();
+            }
+
+            return PayTypeID;
+
+        }
+
+        public int GetCustomerlAdditionID(int customerID)
+        {
+            int no = 0;
+
+
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Select adisyonlar.ID from adisyonlar Inner Join paketSiparis on " +
+                "paketSiparis.ADISYONID=Adisyonlar.ID where (adisyonlar.DURUM=0) and (paketSiparis.DURUM=0) and paketSiparis.MUSTERIID=@customerID", con);
+
+
+            try
+            {
+
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                cmd.Parameters.Add("@customerID", SqlDbType.Int).Value = customerID;
+
+                no = Convert.ToInt32(cmd.ExecuteScalar());
+
+            }
+            catch (Exception ex)
+            {
+
+                string hata = ex.Message;
+            }
+            finally
+            {
+                con.Dispose();
+                con.Close();
+            }
+
+
+            return no;
+        }
+
+
+        public bool getCheckOpenAdditionID(int additionID)
+        {
+            bool result = false;
+
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Select * from adisyonlar where (DURUM=0) and (ID=@additionID)", con);
+
+
+            try
+            {
+
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                cmd.Parameters.Add("@additionID", SqlDbType.Int).Value = additionID;
+                
+                result = Convert.ToBoolean(cmd.ExecuteScalar());
+
+            }
+            catch (Exception ex)
+            {
+
+                string hata = ex.Message;
+            }
+            finally
+            {
+                con.Dispose();
+                con.Close();
+            }
+
+            return result;
+        }
     }
 }

@@ -58,6 +58,7 @@
             this.btncikis = new System.Windows.Forms.Button();
             this.btnGeriDon = new System.Windows.Forms.Button();
             this.lblAdisyonId = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.gbIndirim.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -374,6 +375,16 @@
             this.lblAdisyonId.TabIndex = 28;
             this.lblAdisyonId.Text = "ID";
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Red;
+            this.button1.Location = new System.Drawing.Point(880, 433);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(163, 82);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "HESAP KAPAT";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
             // frmBill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -381,6 +392,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1240, 645);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblAdisyonId);
             this.Controls.Add(this.btncikis);
             this.Controls.Add(this.btnGeriDon);
@@ -437,5 +449,6 @@
         private System.Windows.Forms.Button btnGeriDon;
         private System.Windows.Forms.Label lblAdisyonId;
         private System.Windows.Forms.TextBox txtIndirimTutari;
+        private System.Windows.Forms.Button button1;
     }
 }
