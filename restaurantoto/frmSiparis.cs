@@ -264,7 +264,7 @@ namespace restaurantoto
                 {
 
                     cSiparis saveOrder = new cSiparis();
-                    saveOrder.setDeleteOrder(Convert.ToInt32(lvSiparisler.Items[0].SubItems[4].Text));
+                    saveOrder.setDeleteOrder(Convert.ToInt32(lvSiparisler.SelectedItems[0].SubItems[4].Text));
 
                 }
                 else

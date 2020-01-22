@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBill));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkIndirim = new System.Windows.Forms.CheckBox();
             this.gbIndirim = new System.Windows.Forms.GroupBox();
@@ -58,7 +59,10 @@
             this.btncikis = new System.Windows.Forms.Button();
             this.btnGeriDon = new System.Windows.Forms.Button();
             this.lblAdisyonId = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnHesapKapat = new System.Windows.Forms.Button();
+            this.btnHesapOzet = new System.Windows.Forms.Button();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.groupBox1.SuspendLayout();
             this.gbIndirim.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -375,15 +379,43 @@
             this.lblAdisyonId.TabIndex = 28;
             this.lblAdisyonId.Text = "ID";
             // 
-            // button1
+            // btnHesapKapat
             // 
-            this.button1.BackColor = System.Drawing.Color.Red;
-            this.button1.Location = new System.Drawing.Point(880, 433);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(163, 82);
-            this.button1.TabIndex = 29;
-            this.button1.Text = "HESAP KAPAT";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnHesapKapat.BackColor = System.Drawing.Color.Red;
+            this.btnHesapKapat.Location = new System.Drawing.Point(880, 433);
+            this.btnHesapKapat.Name = "btnHesapKapat";
+            this.btnHesapKapat.Size = new System.Drawing.Size(163, 82);
+            this.btnHesapKapat.TabIndex = 29;
+            this.btnHesapKapat.Text = "HESAP KAPAT";
+            this.btnHesapKapat.UseVisualStyleBackColor = false;
+            this.btnHesapKapat.Click += new System.EventHandler(this.btnHesapKapat_Click);
+            // 
+            // btnHesapOzet
+            // 
+            this.btnHesapOzet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnHesapOzet.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnHesapOzet.Location = new System.Drawing.Point(880, 332);
+            this.btnHesapOzet.Name = "btnHesapOzet";
+            this.btnHesapOzet.Size = new System.Drawing.Size(163, 82);
+            this.btnHesapOzet.TabIndex = 30;
+            this.btnHesapOzet.Text = "Hesap Özeti";
+            this.btnHesapOzet.UseVisualStyleBackColor = false;
+            this.btnHesapOzet.Click += new System.EventHandler(this.btnHesapOzet_Click);
+            // 
+            // printDocument1
+            // 
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+            // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Document = this.printDocument1;
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
             // 
             // frmBill
             // 
@@ -392,7 +424,8 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1240, 645);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnHesapOzet);
+            this.Controls.Add(this.btnHesapKapat);
             this.Controls.Add(this.lblAdisyonId);
             this.Controls.Add(this.btncikis);
             this.Controls.Add(this.btnGeriDon);
@@ -449,6 +482,9 @@
         private System.Windows.Forms.Button btnGeriDon;
         private System.Windows.Forms.Label lblAdisyonId;
         private System.Windows.Forms.TextBox txtIndirimTutari;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnHesapKapat;
+        private System.Windows.Forms.Button btnHesapOzet;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
     }
 }

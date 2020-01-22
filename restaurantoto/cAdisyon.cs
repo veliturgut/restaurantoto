@@ -133,5 +133,44 @@ namespace restaurantoto
             return sonuc;
         }
 
+
+        public void additionClose(int AdditionID,int durum)
+        {
+           
+
+
+            SqlConnection con = new SqlConnection(gnl.conString);
+            SqlCommand cmd = new SqlCommand("Update adisyonlar set durum =@durum where ID=@adisyonId", con);
+
+            try
+            {
+
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+
+                cmd.Parameters.Add("adisyonId", SqlDbType.Int).Value = AdditionID;
+                cmd.Parameters.Add("durum", SqlDbType.Int).Value = durum;
+
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (SqlException ex)
+            {
+                string hata = ex.Message;
+                throw;
+            }
+            finally
+            {
+                con.Dispose();
+                con.Close();
+            }
+
+
+
+            
+        }
+
     }
 }

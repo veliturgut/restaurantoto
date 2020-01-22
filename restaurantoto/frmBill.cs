@@ -170,5 +170,117 @@ namespace restaurantoto
         cRezervasyon rezerve = new cRezervasyon();
         cMasalar masalar = new cMasalar();
 
+        private void btnHesapKapat_Click(object sender, EventArgs e)
+        {
+            if (cGenel._ServisTurNo == 1)
+            {
+                int tableid = masalar.TableGetbyNumber(cGenel._ButtonName);
+                int customerId = 0;
+
+                if (masalar.TableGetbyState(tableid,4) == true)
+                {
+                    customerId = rezerve.getByClientIdFromReservation(tableid);
+
+                }
+                else
+                {
+                    customerId = 1;
+                }
+
+
+                int payTypeId = 0;
+
+                if (rbNakit.Checked)
+                {
+                    payTypeId = 1;
+                }
+                if (rbKrediKarti.Checked)
+                {
+                    payTypeId = 2;
+                }
+                if (rbTicket.Checked)
+                {
+                    payTypeId = 3;
+                }
+
+
+                cOdeme odeme = new cOdeme();
+
+                odeme.AdisyonID = Convert.ToInt32(lblAdisyonId.Text);
+                odeme.OdemeTurId = PayTypeId;
+                odeme.MusteriId = customerId;
+                odeme.AraToplam = Convert.ToInt32(lblOdenecek.Text);
+                odeme.KdvTutari = Convert.ToDecimal(lblKdv.Text);
+                odeme.GenelToplam = Convert.ToDecimal(lblToplamTutar.Text);
+                odeme.Indirim = Convert.ToDecimal(lblIndirim.Text);
+
+                bool result = odeme.billClose(odeme);
+
+                if (result)
+                {
+
+                    MessageBox.Show("Hesap kapatılmıştır.");
+                    masalar.setChangeTableState(Convert.ToString(tableid), 1);
+
+                    cRezervasyon c = new cRezervasyon();
+                    c.reservationClose(Convert.ToInt32(lblAdisyonId.Text));
+
+                    cAdisyon a = new cAdisyon();
+                    a.additionClose(Convert.ToInt32(lblAdisyonId.Text), 0);
+
+                    this.Close();
+
+                    frmMasalar frm = new frmMasalar();
+                    frm.Show();
+
+                }
+                else
+                {
+                    MessageBox.Show("Hesap Kapatılırken bir hata oluştu.");
+                }
+
+
+            }
+        }
+
+        private void btnHesapOzet_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog1.ShowDialog();
+        }
+
+        Font Baslik = new Font("Verdana", 15, FontStyle.Bold);
+        Font altBaslik = new Font("Verdana", 12, FontStyle.Regular);
+        Font icerik = new Font("Verdana", 10);
+        SolidBrush sb = new SolidBrush(Color.Black);
+
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            StringFormat st = new StringFormat();
+            st.Alignment = StringAlignment.Near;
+            e.Graphics.DrawString("xxxx RESTAURANT", Baslik, sb, 350,100, st);
+            
+            e.Graphics.DrawString("-----------------", altBaslik, sb, 350,120, st);
+            e.Graphics.DrawString("Ürün Adı                Adet        Fiyat", altBaslik, sb, 150,250, st);
+            e.Graphics.DrawString("----------------------------------------------", altBaslik, sb, 150,280, st);
+
+            for (int i = 0; i < lvUrunler.Items.Count; i++)
+            {
+                e.Graphics.DrawString(lvUrunler.Items[i].SubItems[0].Text, icerik, sb, 150, 300 + i * 30, st);
+                e.Graphics.DrawString(lvUrunler.Items[1].SubItems[0].Text, icerik, sb, 350, 300 + i * 30, st);
+                e.Graphics.DrawString(lvUrunler.Items[3].SubItems[0].Text, icerik, sb, 420, 300 + i * 30, st);
+
+            }
+
+            e.Graphics.DrawString("---------------------------------------------------", altBaslik, sb, 150, 300 + 30 * lvUrunler.Items.Count, st);
+            e.Graphics.DrawString("İndirim Tutarı   :-------------------"+ lblIndirim.Text + "TL", altBaslik, sb, 250, 300 + 30 * (lvUrunler.Items.Count +1), st);
+            e.Graphics.DrawString("KDV Tutarı       :-------------------"+ lblKdv.Text + "TL", altBaslik, sb, 250, 300 + 30 * (lvUrunler.Items.Count +2), st);
+            e.Graphics.DrawString("Toplam Tutarı    :-------------------"+ lblToplamTutar.Text + "TL", altBaslik, sb, 250, 300 + 30 * (lvUrunler.Items.Count +3), st);
+            e.Graphics.DrawString("Ödediğiniz Tutar :-------------------"+ lblOdenecek.Text + "TL", altBaslik, sb, 250, 300 + 30 * (lvUrunler.Items.Count +4), st);
+            
+
+
+
+        }
     }
 }

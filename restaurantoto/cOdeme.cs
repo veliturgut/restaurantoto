@@ -26,11 +26,6 @@ namespace restaurantoto
         #endregion
 
         #region Properties
-        public int OdemeID
-        {
-            get { return _OdemeID; }
-            set { _OdemeID = value; }
-        }
 
         public int AdisyonID
         {
