@@ -40,7 +40,7 @@ namespace restaurantoto
 
         private void btnMusteriler_Click(object sender, EventArgs e)
         {
-            frmMusteriler frm = new frmMusteriler();
+            frmMusteriAra frm = new frmMusteriAra();
             this.Close();
             frm.Show();
         }

@@ -10,11 +10,27 @@ using System.Windows.Forms;
 
 namespace restaurantoto
 {
-    public partial class frmMusteriler : Form
+    public partial class frmMusteriAra : Form
     {
-        public frmMusteriler()
+        public frmMusteriAra()
         {
             InitializeComponent();
+        }
+
+        private void btnGeriDon_Click(object sender, EventArgs e)
+        {
+            frmMenu frm = new frmMenu();
+
+            this.Close();
+            frm.Show();
+        }
+
+        private void btnCikis_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Çıkmak istediğinize emin misiniz?", "Uyarı !!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }

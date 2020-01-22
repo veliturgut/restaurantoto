@@ -241,6 +241,47 @@ namespace restaurantoto
 
 
             }
+            else if (cGenel._ServisTurNo == 2)
+            {
+                cOdeme odeme = new cOdeme();
+
+                odeme.AdisyonID = Convert.ToInt32(lblAdisyonId.Text);
+                odeme.OdemeTurId = PayTypeId;
+                odeme.MusteriId = 1; // düzeltilecek
+                odeme.AraToplam = Convert.ToInt32(lblOdenecek.Text);
+                odeme.KdvTutari = Convert.ToDecimal(lblKdv.Text);
+                odeme.GenelToplam = Convert.ToDecimal(lblToplamTutar.Text);
+                odeme.Indirim = Convert.ToDecimal(lblIndirim.Text);
+
+
+                bool result = odeme.billClose(odeme);
+
+                if (result)
+                {
+
+                    MessageBox.Show("Hesap kapatılmıştır.");
+                    
+                    cAdisyon a = new cAdisyon();
+                    a.additionClose(Convert.ToInt32(lblAdisyonId.Text), 0);
+              
+
+                    cPaketler p = new cPaketler();
+                    p.OrderServiceClose(Convert.ToInt32(lblAdisyonId.Text));
+
+                    
+
+                    this.Close();
+
+                    frmMasalar frm = new frmMasalar();
+                    frm.Show();
+
+                }
+                else
+                {
+                    MessageBox.Show("Hesap Kapatılırken bir hata oluştu.");
+                }
+
+            }
         }
 
         private void btnHesapOzet_Click(object sender, EventArgs e)

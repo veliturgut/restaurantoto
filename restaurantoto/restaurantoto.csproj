@@ -142,6 +142,9 @@
     <EmbeddedResource Include="frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMusteriler.resx">
+      <DependentUpon>frmMusteriler.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSiparis.resx">
       <DependentUpon>frmSiparis.cs</DependentUpon>
     </EmbeddedResource>
