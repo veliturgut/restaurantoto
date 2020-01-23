@@ -49,6 +49,7 @@
     <Compile Include="cAdisyon.cs" />
     <Compile Include="cGenel.cs" />
     <Compile Include="cMasalar.cs" />
+    <Compile Include="cMusteriler.cs" />
     <Compile Include="cOdeme.cs" />
     <Compile Include="cPaketler.cs" />
     <Compile Include="cPersonelHareketleri.cs" />
@@ -104,6 +105,12 @@
     <Compile Include="frmMutfak.Designer.cs">
       <DependentUpon>frmMutfak.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPaketSiparis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPaketSiparis.Designer.cs">
+      <DependentUpon>frmPaketSiparis.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmRaporlar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +135,12 @@
     <Compile Include="frmSiparis.Designer.cs">
       <DependentUpon>frmSiparis.cs</DependentUpon>
     </Compile>
+    <Compile Include="MusteriEkleme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MusteriEkleme.Designer.cs">
+      <DependentUpon>MusteriEkleme.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmBill.resx">
@@ -147,6 +160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSiparis.resx">
       <DependentUpon>frmSiparis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MusteriEkleme.resx">
+      <DependentUpon>MusteriEkleme.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

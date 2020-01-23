@@ -32,5 +32,58 @@ namespace restaurantoto
                 Application.Exit();
             }
         }
+
+        private void btnYeniMusteri_Click(object sender, EventArgs e)
+        {
+            MusteriEkleme m = new MusteriEkleme();
+            cGenel._musteriEkleme = 1;
+            m.Show();
+
+        }
+
+        private void frmMusteriAra_Load(object sender, EventArgs e)
+        {
+            cMusteriler c = new cMusteriler();
+            c.musterileriGetir(lvMusteriler);
+        }
+
+        private void btnMusteriSec_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnMusteriGuncelle_Click(object sender, EventArgs e)
+        {
+            if (lvMusteriler.SelectedItems.Count > 0)
+            {
+                MusteriEkleme frm = new MusteriEkleme();
+                cGenel._musteriEkleme = 1;
+                cGenel._musteriId = Convert.ToInt32(lvMusteriler.SelectedItems[0].SubItems[0].Text);
+
+                
+                this.Close();
+                frm.Show();
+            }
+
+            if (cGenel._musteriEkleme == 0)
+            {
+                frmRezervasyon frm = new frmRezervasyon();
+                cGenel._musteriEkleme = 1;
+                this.Close();
+                frm.Show();
+            }
+            else if (cGenel._musteriEkleme == 1)
+            {
+                frmPaketSiparis frm = new frmPaketSiparis();
+                cGenel._musteriEkleme = 0;
+                this.Close();
+                frm.Show();
+            }
+        }
     }
 }

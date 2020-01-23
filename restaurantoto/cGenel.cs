@@ -15,6 +15,8 @@ namespace restaurantoto
 
         public static int _personelId;
         public static int _gorevId;
+        public static int _musteriEkleme;
+        public static int _musteriId;
 
         public static string _ButtonValue;
 

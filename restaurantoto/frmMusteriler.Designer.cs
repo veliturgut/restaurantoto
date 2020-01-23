@@ -40,13 +40,19 @@
             this.txtAdisyonID = new System.Windows.Forms.TextBox();
             this.btnYeniMusteri = new System.Windows.Forms.Button();
             this.btnMusteriSec = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnMusteriGuncelle = new System.Windows.Forms.Button();
             this.btnAdisyonBul = new System.Windows.Forms.Button();
             this.btnSiparisler = new System.Windows.Forms.Button();
             this.btnCikis = new System.Windows.Forms.Button();
             this.btnGeriDon = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lvMusteriler = new System.Windows.Forms.ListView();
             this.btnGeriDön = new System.Windows.Forms.Button();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // txtMusteriAd
@@ -66,7 +72,7 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(42, 56);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 39);
+            this.label1.Size = new System.Drawing.Size(71, 38);
             this.label1.TabIndex = 1;
             this.label1.Text = "ADI";
             // 
@@ -78,7 +84,7 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(254, 56);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(146, 39);
+            this.label2.Size = new System.Drawing.Size(141, 38);
             this.label2.TabIndex = 3;
             this.label2.Text = "SOYADI";
             // 
@@ -99,7 +105,7 @@
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(932, 56);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(136, 39);
+            this.label3.Size = new System.Drawing.Size(131, 38);
             this.label3.TabIndex = 5;
             this.label3.Text = "ADRES";
             // 
@@ -120,7 +126,7 @@
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(466, 56);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(175, 39);
+            this.label4.Size = new System.Drawing.Size(169, 38);
             this.label4.TabIndex = 7;
             this.label4.Text = "TELEFON";
             // 
@@ -141,7 +147,7 @@
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(678, 56);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(215, 39);
+            this.label5.Size = new System.Drawing.Size(206, 38);
             this.label5.TabIndex = 9;
             this.label5.Text = "ADİSYON ID";
             // 
@@ -166,6 +172,7 @@
             this.btnYeniMusteri.TabIndex = 11;
             this.btnYeniMusteri.Text = "Yeni Müşteri";
             this.btnYeniMusteri.UseVisualStyleBackColor = false;
+            this.btnYeniMusteri.Click += new System.EventHandler(this.btnYeniMusteri_Click);
             // 
             // btnMusteriSec
             // 
@@ -179,19 +186,21 @@
             this.btnMusteriSec.TabIndex = 12;
             this.btnMusteriSec.Text = "MÜSTERİ SEÇ";
             this.btnMusteriSec.UseVisualStyleBackColor = false;
+            this.btnMusteriSec.Click += new System.EventHandler(this.btnMusteriSec_Click);
             // 
-            // button1
+            // btnMusteriGuncelle
             // 
-            this.button1.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Ignore;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.button1.Location = new System.Drawing.Point(585, 607);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(284, 108);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "MÜSTERİ GÜNCELLE";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnMusteriGuncelle.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.btnMusteriGuncelle.DialogResult = System.Windows.Forms.DialogResult.Ignore;
+            this.btnMusteriGuncelle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMusteriGuncelle.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnMusteriGuncelle.Location = new System.Drawing.Point(585, 607);
+            this.btnMusteriGuncelle.Name = "btnMusteriGuncelle";
+            this.btnMusteriGuncelle.Size = new System.Drawing.Size(284, 108);
+            this.btnMusteriGuncelle.TabIndex = 13;
+            this.btnMusteriGuncelle.Text = "MÜSTERİ GÜNCELLE";
+            this.btnMusteriGuncelle.UseVisualStyleBackColor = false;
+            this.btnMusteriGuncelle.Click += new System.EventHandler(this.btnMusteriGuncelle_Click);
             // 
             // btnAdisyonBul
             // 
@@ -247,14 +256,25 @@
             this.btnGeriDon.UseVisualStyleBackColor = false;
             this.btnGeriDon.Click += new System.EventHandler(this.btnGeriDon_Click);
             // 
-            // listView1
+            // lvMusteriler
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(49, 161);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(884, 440);
-            this.listView1.TabIndex = 32;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.lvMusteriler.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.lvMusteriler.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lvMusteriler.FullRowSelect = true;
+            this.lvMusteriler.GridLines = true;
+            this.lvMusteriler.HideSelection = false;
+            this.lvMusteriler.Location = new System.Drawing.Point(49, 161);
+            this.lvMusteriler.Name = "lvMusteriler";
+            this.lvMusteriler.Size = new System.Drawing.Size(884, 440);
+            this.lvMusteriler.TabIndex = 32;
+            this.lvMusteriler.UseCompatibleStateImageBehavior = false;
+            this.lvMusteriler.View = System.Windows.Forms.View.Details;
             // 
             // btnGeriDön
             // 
@@ -262,12 +282,42 @@
             this.btnGeriDön.DialogResult = System.Windows.Forms.DialogResult.Ignore;
             this.btnGeriDön.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGeriDön.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnGeriDön.Location = new System.Drawing.Point(952, 439);
+            this.btnGeriDön.Location = new System.Drawing.Point(939, 415);
             this.btnGeriDön.Name = "btnGeriDön";
-            this.btnGeriDön.Size = new System.Drawing.Size(252, 108);
+            this.btnGeriDön.Size = new System.Drawing.Size(144, 108);
             this.btnGeriDön.TabIndex = 33;
             this.btnGeriDön.Text = "GERİ DÖN";
             this.btnGeriDön.UseVisualStyleBackColor = false;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Müşteri No";
+            this.columnHeader1.Width = 0;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "ADI";
+            this.columnHeader2.Width = 140;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "SOYADI";
+            this.columnHeader3.Width = 176;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "TELEFON";
+            this.columnHeader4.Width = 171;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "ADRES";
+            this.columnHeader5.Width = 206;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "E-MAİL";
+            this.columnHeader6.Width = 188;
             // 
             // frmMusteriAra
             // 
@@ -277,12 +327,12 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1263, 819);
             this.Controls.Add(this.btnGeriDön);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lvMusteriler);
             this.Controls.Add(this.btnCikis);
             this.Controls.Add(this.btnGeriDon);
             this.Controls.Add(this.btnSiparisler);
             this.Controls.Add(this.btnAdisyonBul);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnMusteriGuncelle);
             this.Controls.Add(this.btnMusteriSec);
             this.Controls.Add(this.btnYeniMusteri);
             this.Controls.Add(this.label5);
@@ -298,6 +348,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMusteriAra";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmMusteriAra_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -317,12 +368,18 @@
         private System.Windows.Forms.TextBox txtAdisyonID;
         private System.Windows.Forms.Button btnYeniMusteri;
         private System.Windows.Forms.Button btnMusteriSec;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnMusteriGuncelle;
         private System.Windows.Forms.Button btnAdisyonBul;
         private System.Windows.Forms.Button btnSiparisler;
         private System.Windows.Forms.Button btnCikis;
         private System.Windows.Forms.Button btnGeriDon;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lvMusteriler;
         private System.Windows.Forms.Button btnGeriDön;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
     }
 }
